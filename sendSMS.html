@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdServs SMS Sender</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <style>
+        /* Add some styling to the form */
+        #sms-form {
+            width: 50%;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        @media (max-width: 600px) {
+            #sms-form {
+                width: 70%;
+            }
+        }
+
+        /* Style the label and input fields */
+        #sms-form label,
+        #sms-form input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Style the submit button */
+        #sms-form button[type="submit"] {
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="sms-form">
+        <h4>TTF SMS</h4>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="name" placeholder="Enter Name">
+            <label for="floatingName">Enter Name</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="phone-number" placeholder="Enter Phone Number">
+            <label for="floatingNumber">Enter Phone Number</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send SMS</button>
+    </form>
+
+    <form id="sms-form">
+        <h4>Thank You SMS</h4>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="phone-number" placeholder="Enter Phone Number">
+            <label for="floatingNumber">Enter Phone Number</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send SMS</button>
+    </form>
+
+
+    <!-- Send SMS Function -->
+    <script>
+        async function sendSMS(number, message) {
+            const URL = "https://sms.adservs.co.in/vb/apikey.php?";
+            const PARAMS = {
+                'apikey': 'GdpOYXkyax6Co8WL',
+                'senderid': 'ADSERV',
+                'number': number,
+                'message': message,
+            }
+            // send the SMS
+            await fetch(URL + new URLSearchParams(PARAMS).toString());
+        }
+    </script>
+
+    <!-- TTF SMS -->
+    <script>
+        document.querySelector("#sms-form").addEventListener("submit", event => {
+            event.preventDefault();
+            let name = document.querySelector("#name").value;
+            let number = document.querySelector("#phone-number").value;
+            let ttfMsg = `Hi ${name},\nIt was a pleasure meeting to you at OTM/TTF Mumbai\nWe provide Bulk SMS Solution for your business.\nFast & responsive API that can be easily integrates with your system to send automate sms like:\nConfirmation/Cancellation/Update/Payments & Etc.\nFor Details: 9930432351\nbit.ly/ADSERVS`;
+            // send the SMS
+            sendSMS(number, ttfMsg);
+            // show an alert saying "SMS Sent"
+            alert("SMS Sent");
+        });
+    </script>
+
+
+    <!-- <script>
+        let thankYouMsg = `Hi ${name},\nIt was a pleasure meeting to you at OTM/TTF Mumbai\nWe provide Bulk SMS Solution for your business.\nFast & responsive API that can be easily integrates with your system to send automate sms like:\nConfirmation/Cancellation/Update/Payments & Etc.\nFor Details: 9930432351\nbit.ly/ADSERVS`;
+        document.querySelector("#sms-form").addEventListener("submit", event => {
+            event.preventDefault();
+            let name = document.querySelector("#name").value;
+            let number = document.querySelector("#phone-number").value;
+            // send the SMS
+            sendSMS(name, number, ttfMessage);
+            // show an alert saying "SMS Sent"
+            alert("SMS Sent");
+        });
+    </script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
